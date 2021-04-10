@@ -2,8 +2,8 @@
 apply plugin: 'java'
 
 compileJava {
-  sourceCompatibility '11'
-  targetCompatibility '11'
+  sourceCompatibility '8'
+  targetCompatibility '8'
 }
 
 sourceSets {
@@ -13,6 +13,7 @@ sourceSets {
 
 repositories { mavenCentral() }
 dependencies {
+  compile 'org.apache.commons:commons-lang3:3.12.0'
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.12.2'
 }

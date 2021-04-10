@@ -1,3 +1,8 @@
+### Fork
+Forked from https://github.com/fesh0r/fernflower
+
+- Java 8 compatible
+
 ### About Fernflower
 
 Fernflower is the first actually working analytical decompiler for Java and 
