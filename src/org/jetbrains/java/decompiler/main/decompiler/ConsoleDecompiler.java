@@ -18,8 +18,39 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
+
+  /**
+   * Starts decompiler
+   *
+   * @param mapOptions decompiling options
+   * @param sources sources to decompile
+   * @param libraries libraries
+   * @param destination destination directory
+   * @author intcoder
+   */
+  public static void start(Map<String, Object> mapOptions, List<File> sources, List<File> libraries, File destination) {
+    PrintStreamLogger logger = new PrintStreamLogger(System.out);
+    ConsoleDecompiler decompiler = new ConsoleDecompiler(destination, mapOptions, logger);
+
+    for (File library : libraries) {
+      decompiler.addLibrary(library);
+    }
+    for (File source : sources) {
+      decompiler.addSource(source);
+    }
+
+    decompiler.decompileContext();
+  }
+
+  /**
+   * Parses arguments and starts decompiler
+   *
+   * @param args cli arguments
+   * @author intcoder
+   */
   @SuppressWarnings("UseOfSystemOutOrSystemErr")
   public static void main(String[] args) {
+    // Parsing
     if (args.length < 2) {
       System.out.println(
         "Usage: java -jar fernflower.jar [-<option>=<value>]* [<source>]+ <destination>\n" +
@@ -69,17 +100,8 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
       return;
     }
 
-    PrintStreamLogger logger = new PrintStreamLogger(System.out);
-    ConsoleDecompiler decompiler = new ConsoleDecompiler(destination, mapOptions, logger);
-
-    for (File library : libraries) {
-      decompiler.addLibrary(library);
-    }
-    for (File source : sources) {
-      decompiler.addSource(source);
-    }
-
-    decompiler.decompileContext();
+    // Starting decompiler
+    start(mapOptions, sources, libraries, destination);
   }
 
   @SuppressWarnings("UseOfSystemOutOrSystemErr")
