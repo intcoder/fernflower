@@ -16,7 +16,7 @@ Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.
 
 ### Running from command line
 
-`java -jar fernflower.jar [-<option>=<value>]* [<source>]+ <destination>`
+`java -jar fernflower.jar [-<option>=<value>]* [<source>]+ -d <destination>`
 
 \* means 0 or more times\
 \+ means 1 or more times
@@ -31,9 +31,9 @@ Fernflower is licenced under the [Apache Licence Version 2.0](http://www.apache.
 
 ##### Examples:
 
-`java -jar fernflower.jar -hes=0 -hdc=0 c:\Temp\binary\ -e=c:\Java\rt.jar c:\Temp\source\`
+`java -jar fernflower.jar -hes=0 -hdc=0 c:\Temp\binary\ -e=c:\Java\rt.jar -d c:\Temp\source\`
 
-`java -jar fernflower.jar -dgs=1 c:\Temp\binary\library.jar c:\Temp\binary\Boot.class c:\Temp\source\`
+`java -jar fernflower.jar -dgs=1 c:\Temp\binary\library.jar c:\Temp\binary\Boot.class -d c:\Temp\source\`
 
 ### Command-line options
 

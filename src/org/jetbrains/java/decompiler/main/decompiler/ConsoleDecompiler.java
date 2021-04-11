@@ -42,67 +42,67 @@ public class ConsoleDecompiler implements IBytecodeProvider, IResultSaver {
     decompiler.decompileContext();
   }
 
-  /**
-   * Parses arguments and starts decompiler
-   *
-   * @param args cli arguments
-   * @author intcoder
-   */
-  @SuppressWarnings("UseOfSystemOutOrSystemErr")
-  public static void main(String[] args) {
-    // Parsing
-    if (args.length < 2) {
-      System.out.println(
-        "Usage: java -jar fernflower.jar [-<option>=<value>]* [<source>]+ <destination>\n" +
-        "Example: java -jar fernflower.jar -dgs=true c:\\my\\source\\ c:\\my.jar d:\\decompiled\\");
-      return;
-    }
-
-    Map<String, Object> mapOptions = new HashMap<>();
-    List<File> sources = new ArrayList<>();
-    List<File> libraries = new ArrayList<>();
-
-    boolean isOption = true;
-    for (int i = 0; i < args.length - 1; ++i) { // last parameter - destination
-      String arg = args[i];
-
-      if (isOption && arg.length() > 5 && arg.charAt(0) == '-' && arg.charAt(4) == '=') {
-        String value = arg.substring(5);
-        if ("true".equalsIgnoreCase(value)) {
-          value = "1";
-        }
-        else if ("false".equalsIgnoreCase(value)) {
-          value = "0";
-        }
-
-        mapOptions.put(arg.substring(1, 4), value);
-      }
-      else {
-        isOption = false;
-
-        if (arg.startsWith("-e=")) {
-          addPath(libraries, arg.substring(3));
-        }
-        else {
-          addPath(sources, arg);
-        }
-      }
-    }
-
-    if (sources.isEmpty()) {
-      System.out.println("error: no sources given");
-      return;
-    }
-
-    File destination = new File(args[args.length - 1]);
-    if (!destination.isDirectory()) {
-      System.out.println("error: destination '" + destination + "' is not a directory");
-      return;
-    }
-
-    // Starting decompiler
-    start(mapOptions, sources, libraries, destination);
-  }
+//  /**
+//   * Parses arguments and starts decompiler
+//   *
+//   * @param args cli arguments
+//   * @author intcoder
+//   */
+//  @SuppressWarnings("UseOfSystemOutOrSystemErr")
+//  public static void main(String[] args) {
+//    // Parsing
+//    if (args.length < 2) {
+//      System.out.println(
+//        "Usage: java -jar fernflower.jar [-<option>=<value>]* [<source>]+ <destination>\n" +
+//        "Example: java -jar fernflower.jar -dgs=true c:\\my\\source\\ c:\\my.jar d:\\decompiled\\");
+//      return;
+//    }
+//
+//    Map<String, Object> mapOptions = new HashMap<>();
+//    List<File> sources = new ArrayList<>();
+//    List<File> libraries = new ArrayList<>();
+//
+//    boolean isOption = true;
+//    for (int i = 0; i < args.length - 1; ++i) { // last parameter - destination
+//      String arg = args[i];
+//
+//      if (isOption && arg.length() > 5 && arg.charAt(0) == '-' && arg.charAt(4) == '=') {
+//        String value = arg.substring(5);
+//        if ("true".equalsIgnoreCase(value)) {
+//          value = "1";
+//        }
+//        else if ("false".equalsIgnoreCase(value)) {
+//          value = "0";
+//        }
+//
+//        mapOptions.put(arg.substring(1, 4), value);
+//      }
+//      else {
+//        isOption = false;
+//
+//        if (arg.startsWith("-e=")) {
+//          addPath(libraries, arg.substring(3));
+//        }
+//        else {
+//          addPath(sources, arg);
+//        }
+//      }
+//    }
+//
+//    if (sources.isEmpty()) {
+//      System.out.println("error: no sources given");
+//      return;
+//    }
+//
+//    File destination = new File(args[args.length - 1]);
+//    if (!destination.isDirectory()) {
+//      System.out.println("error: destination '" + destination + "' is not a directory");
+//      return;
+//    }
+//
+//    // Starting decompiler
+//    start(mapOptions, sources, libraries, destination);
+//  }
 
   @SuppressWarnings("UseOfSystemOutOrSystemErr")
   private static void addPath(List<? super File> list, String path) {

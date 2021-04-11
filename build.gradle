@@ -1,6 +1,7 @@
 // Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 apply plugin: 'java'
 
+
 compileJava {
   sourceCompatibility '8'
   targetCompatibility '8'
@@ -13,14 +14,24 @@ sourceSets {
 
 repositories { mavenCentral() }
 dependencies {
+  compile 'info.picocli:picocli:4.6.1'
   compile 'org.apache.commons:commons-lang3:3.12.0'
+
+  annotationProcessor 'info.picocli:picocli-codegen:4.6.1'
+
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.12.2'
+  testCompile 'org.apache.commons:commons-text:1.9'
 }
 
 jar {
   archiveName 'fernflower.jar'
   manifest {
-    attributes 'Main-Class': 'org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler'
+    attributes 'Main-Class': 'org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompilerStarter'
+  }
+
+  // Fat JAR
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
   }
 }
