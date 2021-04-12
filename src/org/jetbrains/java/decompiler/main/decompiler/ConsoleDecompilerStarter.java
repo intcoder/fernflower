@@ -25,7 +25,7 @@ public class ConsoleDecompilerStarter implements Callable<Integer> {
     " Especially renaming of identifiers (s. option 'ren') can benefit from information about external classes.")
   private List<File> libraries = new ArrayList<>();
 
-  @Option(names = {"-d", "--destination"}, paramLabel = "<path>", description = "destination directory")
+  @Option(names = {"-d", "--destination"}, paramLabel = "<path>", description = "destination directory", required = true)
   private File destination;
 
   @Parameters(description = "Files or directories with files to be decompiled." +
