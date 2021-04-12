@@ -17,10 +17,10 @@ public class Parser {
 
   @Test
   public void name() throws Exception {
-    Path preferencesPath = Paths.get("src/org/jetbrains/java/decompiler/main/extern/IFernflowerPreferences.java");
+    Path preferencesPath = Paths.get("src/main/java/org/jetbrains/java/decompiler/main/extern/IFernflowerPreferences.java");
     String preferencesContent = new String(Files.readAllBytes(preferencesPath));
 
-    Path readmePath = Paths.get("test/net/intcoder/descriptions.txt" );
+    Path readmePath = Paths.get("src/test/resources/net/intcoder/descriptions.txt" );
     String readmeContent = new String(Files.readAllBytes(readmePath));
 
     Map<String, String> fields = getFields(preferencesContent);

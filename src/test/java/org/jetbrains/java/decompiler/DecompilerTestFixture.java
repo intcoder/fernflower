@@ -32,6 +32,7 @@ public class DecompilerTestFixture {
     if (!isTestDataDir(testDataDir)) testDataDir = new File("plugins/java-decompiler/engine/testData");
     if (!isTestDataDir(testDataDir)) testDataDir = new File("../community/plugins/java-decompiler/engine/testData");
     if (!isTestDataDir(testDataDir)) testDataDir = new File("../plugins/java-decompiler/engine/testData");
+    if (!isTestDataDir(testDataDir)) testDataDir = new File("src/test/resources");
     assertTrue("current dir: " + new File("").getAbsolutePath(), isTestDataDir(testDataDir));
     testDataDir = testDataDir.getAbsoluteFile();
 

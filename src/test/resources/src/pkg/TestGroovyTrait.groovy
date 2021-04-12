@@ -1,4 +1,4 @@
-package pkg
+package src.pkg
 
 trait TestGroovyTrait {
   def myField = 42

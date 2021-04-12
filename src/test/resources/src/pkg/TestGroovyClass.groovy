@@ -1,4 +1,4 @@
-package pkg
+package src.pkg
 
 import java.util.concurrent.Callable
 
