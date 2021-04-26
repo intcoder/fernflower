@@ -15,10 +15,10 @@ import java.util.regex.Pattern;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class Parser {
+class Parser {
 
   @Test
-  public void name() throws Exception {
+  void name() throws Exception {
     Path preferencesPath = Paths.get("src/main/java/org/jetbrains/java/decompiler/main/extern/IFernflowerPreferences.java");
     String preferencesContent = new String(Files.readAllBytes(preferencesPath));
 

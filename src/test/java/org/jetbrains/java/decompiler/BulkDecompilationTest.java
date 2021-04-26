@@ -16,23 +16,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BulkDecompilationTest {
+class BulkDecompilationTest {
   private DecompilerTestFixture fixture;
 
   @BeforeEach
-  public void setUp() throws IOException {
+  void setUp() throws IOException {
     fixture = new DecompilerTestFixture();
     fixture.setUp();
   }
 
   @AfterEach
-  public void tearDown() {
+  void tearDown() {
     fixture.tearDown();
     fixture = null;
   }
 
   @Test
-  public void testDirectory() {
+  void testDirectory() {
     File classes = new File(fixture.getTempDir(), "classes");
     unpack(new File(fixture.getTestDataDir(), "bulk.jar"), classes);
 
@@ -44,17 +44,17 @@ public class BulkDecompilationTest {
   }
 
   @Test
-  public void testJar() {
+  void testJar() {
     doTestJar("bulk");
   }
 
   @Test
-  public void testKtJar() {
+  void testKtJar() {
     doTestJar("kt25937");
   }
 
   @Test
-  public void testObfuscated() {
+  void testObfuscated() {
     doTestJar("obfuscated");
   }
 

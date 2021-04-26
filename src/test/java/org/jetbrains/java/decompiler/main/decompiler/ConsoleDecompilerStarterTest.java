@@ -8,10 +8,10 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ConsoleDecompilerStarterTest {
+class ConsoleDecompilerStarterTest {
 
   @Test
-  public void parseRemainder() {
+  void parseRemainder() {
     List<String> remainder = Arrays.asList("-test=1", "-t", "--test==qw-er=ty", "a");
     Map<String, Object> map = new LinkedHashMap<>();
 

@@ -17,11 +17,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SingleClassesTest {
+class SingleClassesTest {
   private DecompilerTestFixture fixture;
 
   @BeforeEach
-  public void setUp() throws IOException {
+  void setUp() throws IOException {
     fixture = new DecompilerTestFixture();
     fixture.setUp(IFernflowerPreferences.BYTECODE_SOURCE_MAPPING, "1",
                   IFernflowerPreferences.DUMP_ORIGINAL_LINES, "1",
@@ -30,111 +30,111 @@ public class SingleClassesTest {
   }
 
   @AfterEach
-  public void tearDown() {
+  void tearDown() {
     fixture.tearDown();
     fixture = null;
   }
 
-  @Test public void testPrimitiveNarrowing() { doTest("pkg/TestPrimitiveNarrowing"); }
-  @Test public void testClassFields() { doTest("pkg/TestClassFields"); }
-  @Test public void testInterfaceFields() { doTest("pkg/TestInterfaceFields"); }
-  @Test public void testClassLambda() { doTest("pkg/TestClassLambda"); }
-  @Test public void testClassLoop() { doTest("pkg/TestClassLoop"); }
-  @Test public void testClassSwitch() { doTest("pkg/TestClassSwitch"); }
-  @Test public void testClassTypes() { doTest("pkg/TestClassTypes"); }
-  @Test public void testClassVar() { doTest("pkg/TestClassVar"); }
-  @Test public void testClassNestedInitializer() { doTest("pkg/TestClassNestedInitializer"); }
-  @Test public void testClassCast() { doTest("pkg/TestClassCast"); }
-  @Test public void testDeprecations() { doTest("pkg/TestDeprecations"); }
-  @Test public void testExtendsList() { doTest("pkg/TestExtendsList"); }
-  @Test public void testMethodParameters() { doTest("pkg/TestMethodParameters"); }
-  @Test public void testMethodParametersAttr() { doTest("pkg/TestMethodParametersAttr"); }
-  @Test public void testCodeConstructs() { doTest("pkg/TestCodeConstructs"); }
-  @Test public void testConstants() { doTest("pkg/TestConstants"); }
-  @Test public void testEnum() { doTest("pkg/TestEnum"); }
-  @Test public void testDebugSymbols() { doTest("pkg/TestDebugSymbols"); }
-  @Test public void testInvalidMethodSignature() { doTest("InvalidMethodSignature"); }
-  @Test public void testAnonymousClassConstructor() { doTest("pkg/TestAnonymousClassConstructor"); }
-  @Test public void testInnerClassConstructor() { doTest("pkg/TestInnerClassConstructor"); }
-  @Test public void testInnerClassConstructor11() { doTest("v11/TestInnerClassConstructor"); }
-  @Test public void testTryCatchFinally() { doTest("pkg/TestTryCatchFinally"); }
-  @Test public void testAmbiguousCall() { doTest("pkg/TestAmbiguousCall"); }
-  @Test public void testAmbiguousCallWithDebugInfo() { doTest("pkg/TestAmbiguousCallWithDebugInfo"); }
-  @Test public void testSimpleBytecodeMapping() { doTest("pkg/TestClassSimpleBytecodeMapping"); }
-  @Test public void testSynchronizedMapping() { doTest("pkg/TestSynchronizedMapping"); }
-  @Test public void testAbstractMethods() { doTest("pkg/TestAbstractMethods"); }
-  @Test public void testLocalClass() { doTest("pkg/TestLocalClass"); }
-  @Test public void testAnonymousClass() { doTest("pkg/TestAnonymousClass"); }
-  @Test public void testThrowException() { doTest("pkg/TestThrowException"); }
-  @Test public void testInnerLocal() { doTest("pkg/TestInnerLocal"); }
-  @Test public void testInnerSignature() { doTest("pkg/TestInnerSignature"); }
-  @Test public void testAnonymousSignature() { doTest("pkg/TestAnonymousSignature"); }
-  @Test public void testLocalsSignature() { doTest("pkg/TestLocalsSignature"); }
-  @Test public void testParameterizedTypes() { doTest("pkg/TestParameterizedTypes"); }
-  @Test public void testShadowing() { doTest("pkg/TestShadowing", "pkg/Shadow", "ext/Shadow", "pkg/TestShadowingSuperClass"); }
-  @Test public void testStringConcat() { doTest("pkg/TestStringConcat"); }
-  @Test public void testJava9StringConcat() { doTest("java9/TestJava9StringConcat"); }
-  @Test public void testJava9ModuleInfo() { doTest("java9/module-info"); }
-  @Test public void testJava11StringConcat() { doTest("java11/TestJava11StringConcat"); }
-  @Test public void testMethodReferenceSameName() { doTest("pkg/TestMethodReferenceSameName"); }
-  @Test public void testMethodReferenceLetterClass() { doTest("pkg/TestMethodReferenceLetterClass"); }
-  @Test public void testConstructorReference() { doTest("pkg/TestConstructorReference"); }
-  @Test public void testMemberAnnotations() { doTest("pkg/TestMemberAnnotations"); }
-  @Test public void testMoreAnnotations() { doTest("pkg/MoreAnnotations"); }
-  @Test public void testTypeAnnotations() { doTest("pkg/TypeAnnotations"); }
-  @Test public void testStaticNameClash() { doTest("pkg/TestStaticNameClash"); }
-  @Test public void testExtendingSubclass() { doTest("pkg/TestExtendingSubclass"); }
-  @Test public void testSyntheticAccess() { doTest("pkg/TestSyntheticAccess"); }
-  @Test public void testIllegalVarName() { doTest("pkg/TestIllegalVarName"); }
-  @Test public void testIffSimplification() { doTest("pkg/TestIffSimplification"); }
-  @Test public void testKotlinConstructor() { doTest("pkg/TestKotlinConstructorKt"); }
-  @Test public void testAsserts() { doTest("pkg/TestAsserts"); }
-  @Test public void testLocalsNames() { doTest("pkg/TestLocalsNames"); }
-  @Test public void testAnonymousParamNames() { doTest("pkg/TestAnonymousParamNames"); }
-  @Test public void testAnonymousParams() { doTest("pkg/TestAnonymousParams"); }
-  @Test public void testAccessReplace() { doTest("pkg/TestAccessReplace"); }
-  @Test public void testStringLiterals() { doTest("pkg/TestStringLiterals"); }
-  @Test public void testPrimitives() { doTest("pkg/TestPrimitives"); }
-  @Test public void testClashName() { doTest("pkg/TestClashName", "pkg/SharedName1",
+  @Test void testPrimitiveNarrowing() { doTest("pkg/TestPrimitiveNarrowing"); }
+  @Test void testClassFields() { doTest("pkg/TestClassFields"); }
+  @Test void testInterfaceFields() { doTest("pkg/TestInterfaceFields"); }
+  @Test void testClassLambda() { doTest("pkg/TestClassLambda"); }
+  @Test void testClassLoop() { doTest("pkg/TestClassLoop"); }
+  @Test void testClassSwitch() { doTest("pkg/TestClassSwitch"); }
+  @Test void testClassTypes() { doTest("pkg/TestClassTypes"); }
+  @Test void testClassVar() { doTest("pkg/TestClassVar"); }
+  @Test void testClassNestedInitializer() { doTest("pkg/TestClassNestedInitializer"); }
+  @Test void testClassCast() { doTest("pkg/TestClassCast"); }
+  @Test void testDeprecations() { doTest("pkg/TestDeprecations"); }
+  @Test void testExtendsList() { doTest("pkg/TestExtendsList"); }
+  @Test void testMethodParameters() { doTest("pkg/TestMethodParameters"); }
+  @Test void testMethodParametersAttr() { doTest("pkg/TestMethodParametersAttr"); }
+  @Test void testCodeConstructs() { doTest("pkg/TestCodeConstructs"); }
+  @Test void testConstants() { doTest("pkg/TestConstants"); }
+  @Test void testEnum() { doTest("pkg/TestEnum"); }
+  @Test void testDebugSymbols() { doTest("pkg/TestDebugSymbols"); }
+  @Test void testInvalidMethodSignature() { doTest("InvalidMethodSignature"); }
+  @Test void testAnonymousClassConstructor() { doTest("pkg/TestAnonymousClassConstructor"); }
+  @Test void testInnerClassConstructor() { doTest("pkg/TestInnerClassConstructor"); }
+  @Test void testInnerClassConstructor11() { doTest("v11/TestInnerClassConstructor"); }
+  @Test void testTryCatchFinally() { doTest("pkg/TestTryCatchFinally"); }
+  @Test void testAmbiguousCall() { doTest("pkg/TestAmbiguousCall"); }
+  @Test void testAmbiguousCallWithDebugInfo() { doTest("pkg/TestAmbiguousCallWithDebugInfo"); }
+  @Test void testSimpleBytecodeMapping() { doTest("pkg/TestClassSimpleBytecodeMapping"); }
+  @Test void testSynchronizedMapping() { doTest("pkg/TestSynchronizedMapping"); }
+  @Test void testAbstractMethods() { doTest("pkg/TestAbstractMethods"); }
+  @Test void testLocalClass() { doTest("pkg/TestLocalClass"); }
+  @Test void testAnonymousClass() { doTest("pkg/TestAnonymousClass"); }
+  @Test void testThrowException() { doTest("pkg/TestThrowException"); }
+  @Test void testInnerLocal() { doTest("pkg/TestInnerLocal"); }
+  @Test void testInnerSignature() { doTest("pkg/TestInnerSignature"); }
+  @Test void testAnonymousSignature() { doTest("pkg/TestAnonymousSignature"); }
+  @Test void testLocalsSignature() { doTest("pkg/TestLocalsSignature"); }
+  @Test void testParameterizedTypes() { doTest("pkg/TestParameterizedTypes"); }
+  @Test void testShadowing() { doTest("pkg/TestShadowing", "pkg/Shadow", "ext/Shadow", "pkg/TestShadowingSuperClass"); }
+  @Test void testStringConcat() { doTest("pkg/TestStringConcat"); }
+  @Test void testJava9StringConcat() { doTest("java9/TestJava9StringConcat"); }
+  @Test void testJava9ModuleInfo() { doTest("java9/module-info"); }
+  @Test void testJava11StringConcat() { doTest("java11/TestJava11StringConcat"); }
+  @Test void testMethodReferenceSameName() { doTest("pkg/TestMethodReferenceSameName"); }
+  @Test void testMethodReferenceLetterClass() { doTest("pkg/TestMethodReferenceLetterClass"); }
+  @Test void testConstructorReference() { doTest("pkg/TestConstructorReference"); }
+  @Test void testMemberAnnotations() { doTest("pkg/TestMemberAnnotations"); }
+  @Test void testMoreAnnotations() { doTest("pkg/MoreAnnotations"); }
+  @Test void testTypeAnnotations() { doTest("pkg/TypeAnnotations"); }
+  @Test void testStaticNameClash() { doTest("pkg/TestStaticNameClash"); }
+  @Test void testExtendingSubclass() { doTest("pkg/TestExtendingSubclass"); }
+  @Test void testSyntheticAccess() { doTest("pkg/TestSyntheticAccess"); }
+  @Test void testIllegalVarName() { doTest("pkg/TestIllegalVarName"); }
+  @Test void testIffSimplification() { doTest("pkg/TestIffSimplification"); }
+  @Test void testKotlinConstructor() { doTest("pkg/TestKotlinConstructorKt"); }
+  @Test void testAsserts() { doTest("pkg/TestAsserts"); }
+  @Test void testLocalsNames() { doTest("pkg/TestLocalsNames"); }
+  @Test void testAnonymousParamNames() { doTest("pkg/TestAnonymousParamNames"); }
+  @Test void testAnonymousParams() { doTest("pkg/TestAnonymousParams"); }
+  @Test void testAccessReplace() { doTest("pkg/TestAccessReplace"); }
+  @Test void testStringLiterals() { doTest("pkg/TestStringLiterals"); }
+  @Test void testPrimitives() { doTest("pkg/TestPrimitives"); }
+  @Test void testClashName() { doTest("pkg/TestClashName", "pkg/SharedName1",
           "pkg/SharedName2", "pkg/SharedName3", "pkg/SharedName4", "pkg/NonSharedName",
           "pkg/TestClashNameParent", "ext/TestClashNameParent","pkg/TestClashNameIface", "ext/TestClashNameIface"); }
-  @Test public void testSwitchOnEnum() { doTest("pkg/TestSwitchOnEnum");}
-  @Test public void testVarArgCalls() { doTest("pkg/TestVarArgCalls"); }
-  @Test public void testLambdaParams() { doTest("pkg/TestLambdaParams"); }
-  @Test public void testInterfaceMethods() { doTest("pkg/TestInterfaceMethods"); }
-  @Test public void testConstType() { doTest("pkg/TestConstType"); }
-  @Test public void testPop2OneDoublePop2() { doTest("pkg/TestPop2OneDoublePop2"); }
-  @Test public void testPop2OneLongPop2() { doTest("pkg/TestPop2OneLongPop2"); }
-  @Test public void testPop2TwoIntPop2() { doTest("pkg/TestPop2TwoIntPop2"); }
-  @Test public void testPop2TwoIntTwoPop() { doTest("pkg/TestPop2TwoIntTwoPop"); }
-  @Test public void testSuperInner() { doTest("pkg/TestSuperInner", "pkg/TestSuperInnerBase"); }
-  @Test public void testMissingConstructorCallGood() { doTest("pkg/TestMissingConstructorCallGood"); }
-  @Test public void testMissingConstructorCallBad() { doTest("pkg/TestMissingConstructorCallBad"); }
-  @Test public void testEmptyBlocks() { doTest("pkg/TestEmptyBlocks"); }
-  @Test public void testInvertedFloatComparison() { doTest("pkg/TestInvertedFloatComparison"); }
-  @Test public void testPrivateEmptyConstructor() { doTest("pkg/TestPrivateEmptyConstructor"); }
-  @Test public void testSynchronizedUnprotected() { doTest("pkg/TestSynchronizedUnprotected"); }
-  @Test public void testInterfaceSuper() { doTest("pkg/TestInterfaceSuper"); }
-  @Test public void testFieldSingleAccess() { doTest("pkg/TestFieldSingleAccess"); }
-  @Test public void testPackageInfo() { doTest("pkg/package-info"); }
+  @Test void testSwitchOnEnum() { doTest("pkg/TestSwitchOnEnum");}
+  @Test void testVarArgCalls() { doTest("pkg/TestVarArgCalls"); }
+  @Test void testLambdaParams() { doTest("pkg/TestLambdaParams"); }
+  @Test void testInterfaceMethods() { doTest("pkg/TestInterfaceMethods"); }
+  @Test void testConstType() { doTest("pkg/TestConstType"); }
+  @Test void testPop2OneDoublePop2() { doTest("pkg/TestPop2OneDoublePop2"); }
+  @Test void testPop2OneLongPop2() { doTest("pkg/TestPop2OneLongPop2"); }
+  @Test void testPop2TwoIntPop2() { doTest("pkg/TestPop2TwoIntPop2"); }
+  @Test void testPop2TwoIntTwoPop() { doTest("pkg/TestPop2TwoIntTwoPop"); }
+  @Test void testSuperInner() { doTest("pkg/TestSuperInner", "pkg/TestSuperInnerBase"); }
+  @Test void testMissingConstructorCallGood() { doTest("pkg/TestMissingConstructorCallGood"); }
+  @Test void testMissingConstructorCallBad() { doTest("pkg/TestMissingConstructorCallBad"); }
+  @Test void testEmptyBlocks() { doTest("pkg/TestEmptyBlocks"); }
+  @Test void testInvertedFloatComparison() { doTest("pkg/TestInvertedFloatComparison"); }
+  @Test void testPrivateEmptyConstructor() { doTest("pkg/TestPrivateEmptyConstructor"); }
+  @Test void testSynchronizedUnprotected() { doTest("pkg/TestSynchronizedUnprotected"); }
+  @Test void testInterfaceSuper() { doTest("pkg/TestInterfaceSuper"); }
+  @Test void testFieldSingleAccess() { doTest("pkg/TestFieldSingleAccess"); }
+  @Test void testPackageInfo() { doTest("pkg/package-info"); }
 
   // TODO: fix all below
-  //@Test public void testSwitchOnStrings() { doTest("pkg/TestSwitchOnStrings");}
-  //@Test public void testUnionType() { doTest("pkg/TestUnionType"); }
-  //@Test public void testInnerClassConstructor2() { doTest("pkg/TestInner2"); }
-  //@Test public void testInUse() { doTest("pkg/TestInUse"); }
+  //@Test void testSwitchOnStrings() { doTest("pkg/TestSwitchOnStrings");}
+  //@Test void testUnionType() { doTest("pkg/TestUnionType"); }
+  //@Test void testInnerClassConstructor2() { doTest("pkg/TestInner2"); }
+  //@Test void testInUse() { doTest("pkg/TestInUse"); }
 
-  @Test public void testGroovyClass() { doTest("pkg/TestGroovyClass"); }
-  @Test public void testGroovyTrait() { doTest("pkg/TestGroovyTrait"); }
-  @Test public void testPrivateClasses() { doTest("pkg/PrivateClasses"); }
-  @Test public void testSuspendLambda() { doTest("pkg/TestSuspendLambdaKt"); }
-  @Test public void testNamedSuspendFun2Kt() { doTest("pkg/TestNamedSuspendFun2Kt"); }
-  @Test public void testGenericArgs() { doTest("pkg/TestGenericArgs"); }
-  @Test public void testRecordEmpty() { doTest("records/TestRecordEmpty"); }
-  @Test public void testRecordSimple() { doTest("records/TestRecordSimple"); }
-  @Test public void testRecordVararg() { doTest("records/TestRecordVararg"); }
-  @Test public void testRecordGenericVararg() { doTest("records/TestRecordGenericVararg"); }
-  @Test public void testRecordAnno() { doTest("records/TestRecordAnno"); }
+  @Test void testGroovyClass() { doTest("pkg/TestGroovyClass"); }
+  @Test void testGroovyTrait() { doTest("pkg/TestGroovyTrait"); }
+  @Test void testPrivateClasses() { doTest("pkg/PrivateClasses"); }
+  @Test void testSuspendLambda() { doTest("pkg/TestSuspendLambdaKt"); }
+  @Test void testNamedSuspendFun2Kt() { doTest("pkg/TestNamedSuspendFun2Kt"); }
+  @Test void testGenericArgs() { doTest("pkg/TestGenericArgs"); }
+  @Test void testRecordEmpty() { doTest("records/TestRecordEmpty"); }
+  @Test void testRecordSimple() { doTest("records/TestRecordSimple"); }
+  @Test void testRecordVararg() { doTest("records/TestRecordVararg"); }
+  @Test void testRecordGenericVararg() { doTest("records/TestRecordGenericVararg"); }
+  @Test void testRecordAnno() { doTest("records/TestRecordAnno"); }
 
   private void doTest(String testFile, String... companionFiles) {
     ConsoleDecompiler decompiler = fixture.getDecompiler();
