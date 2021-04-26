@@ -5,35 +5,25 @@ import org.jetbrains.java.decompiler.main.decompiler.ConsoleDecompiler;
 import org.jetbrains.java.decompiler.main.extern.IFernflowerPreferences;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import static org.jetbrains.java.decompiler.DecompilerTestFixture.assertFilesEqual;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(DecTestFixtureExtension.class)
 class SingleClassesTest {
+
+  @DecTestFixture({IFernflowerPreferences.BYTECODE_SOURCE_MAPPING, "1",
+    IFernflowerPreferences.DUMP_ORIGINAL_LINES, "1",
+    IFernflowerPreferences.IGNORE_INVALID_BYTECODE, "1",
+    IFernflowerPreferences.VERIFY_ANONYMOUS_CLASSES, "1"})
   private DecompilerTestFixture fixture;
-
-  @BeforeEach
-  void setUp() throws IOException {
-    fixture = new DecompilerTestFixture();
-    fixture.setUp(IFernflowerPreferences.BYTECODE_SOURCE_MAPPING, "1",
-                  IFernflowerPreferences.DUMP_ORIGINAL_LINES, "1",
-                  IFernflowerPreferences.IGNORE_INVALID_BYTECODE, "1",
-                  IFernflowerPreferences.VERIFY_ANONYMOUS_CLASSES, "1");
-  }
-
-  @AfterEach
-  void tearDown() {
-    fixture.tearDown();
-    fixture = null;
-  }
 
   @Test void testPrimitiveNarrowing() { doTest("pkg/TestPrimitiveNarrowing"); }
   @Test void testClassFields() { doTest("pkg/TestClassFields"); }

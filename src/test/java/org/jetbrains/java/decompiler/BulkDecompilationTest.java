@@ -14,22 +14,15 @@ import static org.jetbrains.java.decompiler.DecompilerTestFixture.assertFilesEqu
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(DecTestFixtureExtension.class)
 class BulkDecompilationTest {
+
+  @DecTestFixture
   private DecompilerTestFixture fixture;
-
-  @BeforeEach
-  void setUp() throws IOException {
-    fixture = new DecompilerTestFixture();
-    fixture.setUp();
-  }
-
-  @AfterEach
-  void tearDown() {
-    fixture.tearDown();
-    fixture = null;
-  }
 
   @Test
   void testDirectory() {
