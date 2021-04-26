@@ -15,8 +15,9 @@ import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class DecompilerTestFixture {
   private File testDataDir;
@@ -33,7 +34,7 @@ public class DecompilerTestFixture {
     if (!isTestDataDir(testDataDir)) testDataDir = new File("../community/plugins/java-decompiler/engine/testData");
     if (!isTestDataDir(testDataDir)) testDataDir = new File("../plugins/java-decompiler/engine/testData");
     if (!isTestDataDir(testDataDir)) testDataDir = new File("src/test/resources");
-    assertTrue("current dir: " + new File("").getAbsolutePath(), isTestDataDir(testDataDir));
+    assertTrue(isTestDataDir(testDataDir), "current dir: " + new File("").getAbsolutePath());
     testDataDir = testDataDir.getAbsoluteFile();
 
     //noinspection SSBasedInspection

@@ -2,7 +2,6 @@ package net.intcoder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
-import org.junit.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Parser {
 
