@@ -33,6 +33,9 @@ import org.jetbrains.java.decompiler.util.TextBuffer;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ExprProcessor implements CodeConstants {
   @SuppressWarnings("SpellCheckingInspection")
@@ -40,11 +43,11 @@ public class ExprProcessor implements CodeConstants {
   public static final String UNKNOWN_TYPE_STRING = "<unknown>";
   public static final String NULL_TYPE_STRING = "<null>";
 
-  private static final Map<Integer, Integer> functionMap = Map.of(
-    opc_arraylength, FunctionExprent.FUNCTION_ARRAY_LENGTH,
-    opc_checkcast, FunctionExprent.FUNCTION_CAST,
-    opc_instanceof, FunctionExprent.FUNCTION_INSTANCEOF
-  );
+  private static final Map<Integer, Integer> functionMap = Stream.of(
+    new AbstractMap.SimpleEntry<>(opc_arraylength, FunctionExprent.FUNCTION_ARRAY_LENGTH),
+    new AbstractMap.SimpleEntry<>(opc_checkcast, FunctionExprent.FUNCTION_CAST),
+    new AbstractMap.SimpleEntry<>(opc_instanceof, FunctionExprent.FUNCTION_INSTANCEOF)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   private static final VarType[] constants = {
     VarType.VARTYPE_INT, VarType.VARTYPE_FLOAT, VarType.VARTYPE_LONG, VarType.VARTYPE_DOUBLE, VarType.VARTYPE_CLASS, VarType.VARTYPE_STRING
@@ -266,7 +269,7 @@ public class ExprProcessor implements CodeConstants {
     for (int i = 0; i < seq.length(); i++) {
       Instruction instr = seq.getInstr(i);
       Integer offset = block.getOriginalOffset(i);
-      Set<Integer> offsets = offset >= 0 ? Set.of(offset) : null;
+      Set<Integer> offsets = offset >= 0 ? Collections.singleton(offset) : null;
 
       switch (instr.opcode) {
         case opc_aconst_null:
@@ -764,7 +767,7 @@ public class ExprProcessor implements CodeConstants {
     ClassesProcessor.ClassNode enclosingClass = (ClassesProcessor.ClassNode) DecompilerContext.getProperty(
       DecompilerContext.CURRENT_CLASS_NODE
     );
-    List<ClassesProcessor.ClassNode> enclosingClassList = new ArrayList<>(List.of(enclosingClass));
+    List<ClassesProcessor.ClassNode> enclosingClassList = new ArrayList<>(Collections.singletonList(enclosingClass));
     while (enclosingClass.parent != null) {
       enclosingClass = enclosingClass.parent;
       enclosingClassList.add(0, enclosingClass);

@@ -447,7 +447,7 @@ public final class SwitchHelper {
         }
         List<Exprent> newExprents;
         if (lastExprentIndex > 0) {
-          newExprents = List.copyOf(firstSwitchExprents.subList(0, lastExprentIndex));
+          newExprents = new ArrayList<>(firstSwitchExprents.subList(0, lastExprentIndex));
         }
         else {
           newExprents = Collections.emptyList();

@@ -30,6 +30,9 @@ import org.jetbrains.java.decompiler.util.TextUtil;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class InvocationExprent extends Exprent {
   private static final int INVOKE_SPECIAL = 1;
@@ -451,16 +454,16 @@ public class InvocationExprent extends Exprent {
     return null;
   }
 
-  private static final Map<String, String> UNBOXING_METHODS = Map.of(
-    "booleanValue", "java/lang/Boolean",
-    "byteValue", "java/lang/Byte",
-    "shortValue", "java/lang/Short",
-    "intValue", "java/lang/Integer",
-    "longValue", "java/lang/Long",
-    "floatValue", "java/lang/Float",
-    "doubleValue", "java/lang/Double",
-    "charValue", "java/lang/Character"
-  );
+  private static final Map<String, String> UNBOXING_METHODS = Stream.of(
+    new AbstractMap.SimpleEntry<>("booleanValue", "java/lang/Boolean"),
+    new AbstractMap.SimpleEntry<>("byteValue", "java/lang/Byte"),
+    new AbstractMap.SimpleEntry<>("shortValue", "java/lang/Short"),
+    new AbstractMap.SimpleEntry<>("intValue", "java/lang/Integer"),
+    new AbstractMap.SimpleEntry<>("longValue", "java/lang/Long"),
+    new AbstractMap.SimpleEntry<>("floatValue", "java/lang/Float"),
+    new AbstractMap.SimpleEntry<>("doubleValue", "java/lang/Double"),
+    new AbstractMap.SimpleEntry<>("charValue", "java/lang/Character")
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   private boolean isUnboxingCall() {
     return !isStatic && parameters.size() == 0 && className.equals(UNBOXING_METHODS.get(name));

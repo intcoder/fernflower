@@ -12,10 +12,10 @@ import org.jetbrains.java.decompiler.modules.decompiler.vars.VarProcessor;
 import org.jetbrains.java.decompiler.modules.decompiler.vars.VarVersionPair;
 import org.jetbrains.java.decompiler.struct.gen.VarType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 public final class SecondaryFunctionsHelper {
 
@@ -30,14 +30,14 @@ public final class SecondaryFunctionsHelper {
     FunctionExprent.FUNCTION_CADD
   };
 
-  private static final Map<Integer, Integer[]> mapNumComparisons = Map.of(
-    FunctionExprent.FUNCTION_EQ, new Integer[]{FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_EQ, FunctionExprent.FUNCTION_GT},
-    FunctionExprent.FUNCTION_NE, new Integer[]{FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_NE, FunctionExprent.FUNCTION_LE},
-    FunctionExprent.FUNCTION_GT, new Integer[]{FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_GT, null},
-    FunctionExprent.FUNCTION_GE, new Integer[]{null, FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_GT},
-    FunctionExprent.FUNCTION_LT, new Integer[]{null, FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_LE},
-    FunctionExprent.FUNCTION_LE, new Integer[]{FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_LE, null}
-  );
+  private static final Map<Integer, Integer[]> mapNumComparisons = Stream.of(
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_EQ, new Integer[]{FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_EQ, FunctionExprent.FUNCTION_GT}),
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_NE, new Integer[]{FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_NE, FunctionExprent.FUNCTION_LE}),
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_GT, new Integer[]{FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_GT, null}),
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_GE, new Integer[]{null, FunctionExprent.FUNCTION_GE, FunctionExprent.FUNCTION_GT}),
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_LT, new Integer[]{null, FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_LE}),
+    new AbstractMap.SimpleEntry<>(FunctionExprent.FUNCTION_LE, new Integer[]{FunctionExprent.FUNCTION_LT, FunctionExprent.FUNCTION_LE, null})
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   public static boolean identifySecondaryFunctions(Statement stat, VarProcessor varProc) {
     if (stat.getExprents() == null) {

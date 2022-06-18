@@ -11,73 +11,83 @@ import org.jetbrains.java.decompiler.struct.match.IMatchable.MatchProperties;
 import org.jetbrains.java.decompiler.struct.match.MatchNode.RuleValue;
 
 import java.util.*;
+import java.util.stream.Stream;
 
-import static java.util.Map.entry;
+import static java.util.stream.Collectors.toMap;
 
 public class MatchEngine {
   @SuppressWarnings("SpellCheckingInspection")
-  private static final Map<String, MatchProperties> stat_properties = Map.of(
-    "type", MatchProperties.STATEMENT_TYPE,
-    "ret", MatchProperties.STATEMENT_RET,
-    "position", MatchProperties.STATEMENT_POSITION,
-    "statsize", MatchProperties.STATEMENT_STATSIZE,
-    "exprsize", MatchProperties.STATEMENT_EXPRSIZE,
-    "iftype", MatchProperties.STATEMENT_IFTYPE);
+  private static final Map<String, MatchProperties> stat_properties = Stream.of(
+    new AbstractMap.SimpleEntry<>("type", MatchProperties.STATEMENT_TYPE),
+    new AbstractMap.SimpleEntry<>("ret", MatchProperties.STATEMENT_RET),
+    new AbstractMap.SimpleEntry<>("position", MatchProperties.STATEMENT_POSITION),
+    new AbstractMap.SimpleEntry<>("statsize", MatchProperties.STATEMENT_STATSIZE),
+    new AbstractMap.SimpleEntry<>("exprsize", MatchProperties.STATEMENT_EXPRSIZE),
+    new AbstractMap.SimpleEntry<>("iftype", MatchProperties.STATEMENT_IFTYPE)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   @SuppressWarnings("SpellCheckingInspection")
-  private static final Map<String, MatchProperties> expr_properties = Map.ofEntries(
-    entry("type", MatchProperties.EXPRENT_TYPE),
-    entry("ret", MatchProperties.EXPRENT_RET),
-    entry("position", MatchProperties.EXPRENT_POSITION),
-    entry("functype", MatchProperties.EXPRENT_FUNCTYPE),
-    entry("exittype", MatchProperties.EXPRENT_EXITTYPE),
-    entry("consttype", MatchProperties.EXPRENT_CONSTTYPE),
-    entry("constvalue", MatchProperties.EXPRENT_CONSTVALUE),
-    entry("invclass", MatchProperties.EXPRENT_INVOCATION_CLASS),
-    entry("signature", MatchProperties.EXPRENT_INVOCATION_SIGNATURE),
-    entry("parameter", MatchProperties.EXPRENT_INVOCATION_PARAMETER),
-    entry("index", MatchProperties.EXPRENT_VAR_INDEX),
-    entry("name", MatchProperties.EXPRENT_FIELD_NAME));
+  private static final Map<String, MatchProperties> expr_properties = Stream.of(
+    new AbstractMap.SimpleEntry<>("type", MatchProperties.EXPRENT_TYPE),
+    new AbstractMap.SimpleEntry<>("ret", MatchProperties.EXPRENT_RET),
+    new AbstractMap.SimpleEntry<>("position", MatchProperties.EXPRENT_POSITION),
+    new AbstractMap.SimpleEntry<>("functype", MatchProperties.EXPRENT_FUNCTYPE),
+    new AbstractMap.SimpleEntry<>("exittype", MatchProperties.EXPRENT_EXITTYPE),
+    new AbstractMap.SimpleEntry<>("consttype", MatchProperties.EXPRENT_CONSTTYPE),
+    new AbstractMap.SimpleEntry<>("constvalue", MatchProperties.EXPRENT_CONSTVALUE),
+    new AbstractMap.SimpleEntry<>("invclass", MatchProperties.EXPRENT_INVOCATION_CLASS),
+    new AbstractMap.SimpleEntry<>("signature", MatchProperties.EXPRENT_INVOCATION_SIGNATURE),
+    new AbstractMap.SimpleEntry<>("parameter", MatchProperties.EXPRENT_INVOCATION_PARAMETER),
+    new AbstractMap.SimpleEntry<>("index", MatchProperties.EXPRENT_VAR_INDEX),
+    new AbstractMap.SimpleEntry<>("name", MatchProperties.EXPRENT_FIELD_NAME)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   @SuppressWarnings("SpellCheckingInspection")
-  private static final Map<String, StatementType> stat_type = Map.of(
-    "if", StatementType.IF,
-    "do", StatementType.DO,
-    "switch", StatementType.SWITCH,
-    "trycatch", StatementType.TRY_CATCH,
-    "basicblock", StatementType.BASIC_BLOCK,
-    "sequence", StatementType.SEQUENCE);
+  private static final Map<String, StatementType> stat_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("if", StatementType.IF),
+    new AbstractMap.SimpleEntry<>("do", StatementType.DO),
+    new AbstractMap.SimpleEntry<>("switch", StatementType.SWITCH),
+    new AbstractMap.SimpleEntry<>("trycatch", StatementType.TRY_CATCH),
+    new AbstractMap.SimpleEntry<>("basicblock", StatementType.BASIC_BLOCK),
+    new AbstractMap.SimpleEntry<>("sequence", StatementType.SEQUENCE)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
-  private static final Map<String, Integer> expr_type = Map.ofEntries(
-    entry("array", Exprent.EXPRENT_ARRAY),
-    entry("assignment", Exprent.EXPRENT_ASSIGNMENT),
-    entry("constant", Exprent.EXPRENT_CONST),
-    entry("exit", Exprent.EXPRENT_EXIT),
-    entry("field", Exprent.EXPRENT_FIELD),
-    entry("function", Exprent.EXPRENT_FUNCTION),
-    entry("if", Exprent.EXPRENT_IF),
-    entry("invocation", Exprent.EXPRENT_INVOCATION),
-    entry("monitor", Exprent.EXPRENT_MONITOR),
-    entry("new", Exprent.EXPRENT_NEW),
-    entry("switch", Exprent.EXPRENT_SWITCH),
-    entry("var", Exprent.EXPRENT_VAR),
-    entry("annotation", Exprent.EXPRENT_ANNOTATION),
-    entry("assert", Exprent.EXPRENT_ASSERT));
+  private static final Map<String, Integer> expr_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("array", Exprent.EXPRENT_ARRAY),
+    new AbstractMap.SimpleEntry<>("assignment", Exprent.EXPRENT_ASSIGNMENT),
+    new AbstractMap.SimpleEntry<>("constant", Exprent.EXPRENT_CONST),
+    new AbstractMap.SimpleEntry<>("exit", Exprent.EXPRENT_EXIT),
+    new AbstractMap.SimpleEntry<>("field", Exprent.EXPRENT_FIELD),
+    new AbstractMap.SimpleEntry<>("function", Exprent.EXPRENT_FUNCTION),
+    new AbstractMap.SimpleEntry<>("if", Exprent.EXPRENT_IF),
+    new AbstractMap.SimpleEntry<>("invocation", Exprent.EXPRENT_INVOCATION),
+    new AbstractMap.SimpleEntry<>("monitor", Exprent.EXPRENT_MONITOR),
+    new AbstractMap.SimpleEntry<>("new", Exprent.EXPRENT_NEW),
+    new AbstractMap.SimpleEntry<>("switch", Exprent.EXPRENT_SWITCH),
+    new AbstractMap.SimpleEntry<>("var", Exprent.EXPRENT_VAR),
+    new AbstractMap.SimpleEntry<>("annotation", Exprent.EXPRENT_ANNOTATION),
+    new AbstractMap.SimpleEntry<>("assert", Exprent.EXPRENT_ASSERT)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
-  private static final Map<String, Integer> expr_func_type = Map.of("eq", FunctionExprent.FUNCTION_EQ);
+  private static final Map<String, Integer> expr_func_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("eq", FunctionExprent.FUNCTION_EQ)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
-  private static final Map<String, Integer> expr_exit_type = Map.of(
-    "return", ExitExprent.EXIT_RETURN,
-    "throw", ExitExprent.EXIT_THROW);
+  private static final Map<String, Integer> expr_exit_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("return", ExitExprent.EXIT_RETURN),
+    new AbstractMap.SimpleEntry<>("throw", ExitExprent.EXIT_THROW)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   @SuppressWarnings("SpellCheckingInspection")
-  private static final Map<String, Integer> stat_if_type = Map.of(
-    "if", IfStatement.IFTYPE_IF,
-    "ifelse", IfStatement.IFTYPE_IFELSE);
+  private static final Map<String, Integer> stat_if_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("if", IfStatement.IFTYPE_IF),
+    new AbstractMap.SimpleEntry<>("ifelse", IfStatement.IFTYPE_IFELSE)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
-  private static final Map<String, VarType> expr_const_type = Map.of(
-    "null", VarType.VARTYPE_NULL,
-    "string", VarType.VARTYPE_STRING);
+  private static final Map<String, VarType> expr_const_type = Stream.of(
+    new AbstractMap.SimpleEntry<>("null", VarType.VARTYPE_NULL),
+    new AbstractMap.SimpleEntry<>("string", VarType.VARTYPE_STRING)
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   private final MatchNode rootNode;
   private final Map<String, Object> variables = new HashMap<>();

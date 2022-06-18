@@ -19,6 +19,9 @@ import org.jetbrains.java.decompiler.util.TextUtil;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ConstExprent extends Exprent {
   private static final String SHORT_SIG = "java/lang/Short";
@@ -36,15 +39,15 @@ public class ConstExprent extends Exprent {
   private static final String E = "E";
   private static final String PI = "PI";
 
-  private static final Map<Integer, String> CHAR_ESCAPES = Map.of(
-    0x8, "\\b",   /* \u0008: backspace BS */
-    0x9, "\\t",   /* \u0009: horizontal tab HT */
-    0xA, "\\n",   /* \u000a: linefeed LF */
-    0xC, "\\f",   /* \u000c: form feed FF */
-    0xD, "\\r",   /* \u000d: carriage return CR */
-    0x27, "\\'",  /* \u0027: single quote ' */
-    0x5C, "\\\\"  /* \u005c: backslash \ */
-  );
+  private static final Map<Integer, String> CHAR_ESCAPES = Stream.of(
+    new AbstractMap.SimpleEntry<>(0x8, "\\b"),   /* \u0008: backspace BS */
+    new AbstractMap.SimpleEntry<>(0x9, "\\t"),   /* \u0009: horizontal tab HT */
+    new AbstractMap.SimpleEntry<>(0xA, "\\n"),   /* \u000a: linefeed LF */
+    new AbstractMap.SimpleEntry<>(0xC, "\\f"),   /* \u000c: form feed FF */
+    new AbstractMap.SimpleEntry<>(0xD, "\\r"),   /* \u000d: carriage return CR */
+    new AbstractMap.SimpleEntry<>(0x27, "\\'"),  /* \u0027: single quote ' */
+    new AbstractMap.SimpleEntry<>(0x5C, "\\\\")  /* \u005c: backslash \ */
+  ).collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue));
 
   private StructMember parent;
   private VarType constType;
