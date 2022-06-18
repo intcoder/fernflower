@@ -1,8 +1,9 @@
-// Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+// Copyright 2000-2022 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package org.jetbrains.java.decompiler.struct.consts;
 
 import org.jetbrains.java.decompiler.code.CodeConstants;
 import org.jetbrains.java.decompiler.main.DecompilerContext;
+import org.jetbrains.java.decompiler.main.extern.ClassFormatException;
 import org.jetbrains.java.decompiler.modules.renamer.PoolInterceptor;
 import org.jetbrains.java.decompiler.struct.gen.FieldDescriptor;
 import org.jetbrains.java.decompiler.struct.gen.MethodDescriptor;
@@ -79,6 +80,7 @@ public class ConstantPool implements NewClassNameBuilder {
         case CodeConstants.CONSTANT_Fieldref:
         case CodeConstants.CONSTANT_Methodref:
         case CodeConstants.CONSTANT_InterfaceMethodref:
+        case CodeConstants.CONSTANT_Dynamic:
         case CodeConstants.CONSTANT_InvokeDynamic:
           pool.add(new LinkConstant(tag, in.readUnsignedShort(), in.readUnsignedShort()));
           nextPass[1].set(i);
@@ -88,6 +90,11 @@ public class ConstantPool implements NewClassNameBuilder {
           pool.add(new LinkConstant(tag, in.readUnsignedByte(), in.readUnsignedShort()));
           nextPass[2].set(i);
           break;
+
+        default:
+          // Fail-fast on unknown constant pool entry.
+          // We have no chance to process this class correctly.
+          throw new ClassFormatException(String.format("Unsupported constant pool entry type %d at index #%d! ", Byte.toUnsignedInt(tag), i));
       }
     }
 
@@ -118,6 +125,7 @@ public class ConstantPool implements NewClassNameBuilder {
         case CodeConstants.CONSTANT_Methodref:
         case CodeConstants.CONSTANT_InterfaceMethodref:
         case CodeConstants.CONSTANT_NameAndType:
+        case CodeConstants.CONSTANT_Dynamic:
         case CodeConstants.CONSTANT_InvokeDynamic:
           in.discard(4);
           break;
@@ -210,11 +218,11 @@ public class ConstantPool implements NewClassNameBuilder {
   public String buildNewClassname(String className) {
     VarType vt = new VarType(className, true);
 
-    String newName = interceptor.getName(vt.value);
+    String newName = interceptor.getName(vt.getValue());
     if (newName != null) {
       StringBuilder buffer = new StringBuilder();
-      if (vt.arrayDim > 0) {
-        buffer.append(J11StringUtils.repeat("[", vt.arrayDim)).append('L').append(newName).append(';');
+      if (vt.getArrayDim() > 0) {
+        buffer.append(J11StringUtils.repeat("[", vt.getArrayDim())).append('L').append(newName).append(';');
       }
       else {
         buffer.append(newName);
