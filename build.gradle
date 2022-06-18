@@ -1,7 +1,6 @@
 // Copyright 2000-2021 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 apply plugin: 'java'
 
-
 compileJava {
   sourceCompatibility '8'
   targetCompatibility '8'
@@ -14,6 +13,7 @@ sourceSets {
 
 repositories { mavenCentral() }
 dependencies {
+  implementation 'org.jetbrains:annotations:20.1.0'
   implementation 'info.picocli:picocli:4.6.1'
   implementation 'org.apache.commons:commons-lang3:3.12.0'
 
